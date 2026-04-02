@@ -1,0 +1,364 @@
+{
+  "version": 1,
+  "ui": {
+    "showTopLevelFields": true,
+    "showTree": true,
+    "showJsonPreview": true,
+    "showGraph": true,
+    "showAssets": true,
+    "showStateEditor": true,
+    "showActionEditor": true,
+    "graph": {
+      "showAutoscaleButton": true,
+      "allowNodeDragging": true,
+      "showArrowheads": true,
+      "curveOffset": 24,
+      "nodeRadius": 34,
+      "layout": "circle"
+    },
+    "tree": {
+      "expandRootOnLoad": true,
+      "expandStatesOnLoad": true,
+      "expandActionSequencesOnLoad": true,
+      "sortStates": false,
+      "sortActionSequences": false
+    },
+    "assets": {
+      "copyDroppedFilesIntoAssetsRoot": true,
+      "storeRelativePaths": true,
+      "allowedExtensions": [
+        ".wav",
+        ".mp3",
+        ".ogg",
+        ".png",
+        ".jpg",
+        ".json"
+      ]
+    }
+  },
+  "fields": {
+    "topLevel": {
+      "version": {
+        "visible": true,
+        "widget": "spinbox",
+        "min": 1,
+        "max": 999,
+        "default": 1
+      },
+      "weapon": {
+        "visible": true,
+        "widget": "lineedit",
+        "default": ""
+      },
+      "magazineSize": {
+        "visible": true,
+        "widget": "spinbox",
+        "min": 0,
+        "max": 999999,
+        "default": 0
+      },
+      "initialState": {
+        "visible": true,
+        "widget": "lineedit",
+        "default": "idle",
+        "required": true
+      }
+    },
+    "transition": {
+      "event": {
+        "visible": true,
+        "widget": "lineedit",
+        "required": true
+      },
+      "target": {
+        "visible": true,
+        "widget": "lineedit",
+        "required": true
+      }
+    }
+  },
+  "actionTypes": {
+    "play_sound": {
+      "label": "Play Sound",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "play_sound"
+        },
+        "sound": {
+          "visible": true,
+          "widget": "asset_path",
+          "required": true,
+          "acceptDrop": true
+        },
+        "loop": {
+          "visible": true,
+          "widget": "checkbox",
+          "default": false
+        }
+      }
+    },
+    "play_sounds": {
+      "label": "Play Multiple Sounds",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "play_sounds"
+        },
+        "sounds": {
+          "visible": true,
+          "widget": "string_list",
+          "required": true,
+          "acceptDrop": true
+        },
+        "loop": {
+          "visible": true,
+          "widget": "checkbox",
+          "default": false
+        }
+      }
+    },
+    "stop_sound": {
+      "label": "Stop Sound",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "stop_sound"
+        },
+        "sound": {
+          "visible": true,
+          "widget": "asset_path",
+          "required": false,
+          "acceptDrop": true
+        }
+      }
+    },
+    "emit_event": {
+      "label": "Emit Event",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "emit_event"
+        },
+        "event": {
+          "visible": true,
+          "widget": "lineedit",
+          "required": true
+        }
+      }
+    },
+    "run_sequence": {
+      "label": "Run Sequence",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "run_sequence"
+        },
+        "name": {
+          "visible": true,
+          "widget": "lineedit",
+          "required": true,
+          "source": "actionSequences"
+        }
+      }
+    },
+    "consume_ammo": {
+      "label": "Consume Ammo",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "consume_ammo"
+        },
+        "amount": {
+          "visible": true,
+          "widget": "spinbox",
+          "required": true,
+          "min": -999999,
+          "max": 999999,
+          "default": 1
+        }
+      }
+    },
+    "delay": {
+      "label": "Delay",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "delay"
+        },
+        "delayMs": {
+          "visible": true,
+          "widget": "spinbox",
+          "required": true,
+          "min": 0,
+          "max": 999999,
+          "suffix": " ms",
+          "default": 100
+        }
+      }
+    },
+    "set_light_pattern": {
+      "label": "Set Light Pattern",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": true,
+          "default": "set_light_pattern"
+        },
+        "pattern.mode": {
+          "visible": true,
+          "widget": "combo",
+          "required": true,
+          "default": "solid",
+          "options": [
+            "solid",
+            "flash",
+            "pulse",
+            "sequence"
+          ]
+        },
+        "pattern.color": {
+          "visible": true,
+          "widget": "rgb_color",
+          "default": [0, 0, 0]
+        },
+        "pattern.brightness": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 255,
+          "default": 255
+        },
+        "pattern.durationMs": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999,
+          "suffix": " ms"
+        },
+        "pattern.count": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999
+        },
+        "pattern.intervalMs": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999,
+          "suffix": " ms"
+        },
+        "pattern.steps": {
+          "visible": true,
+          "widget": "light_steps_table",
+          "columns": [
+            "R",
+            "G",
+            "B",
+            "Duration ms"
+          ],
+          "showWhen": {
+            "pattern.mode": "sequence"
+          }
+        }
+      }
+    },
+    "custom": {
+      "label": "Custom",
+      "fields": {
+        "type": {
+          "visible": true,
+          "readOnly": false,
+          "default": "custom"
+        },
+        "sound": {
+          "visible": true,
+          "widget": "asset_path",
+          "acceptDrop": true
+        },
+        "sounds": {
+          "visible": true,
+          "widget": "string_list",
+          "acceptDrop": true
+        },
+        "loop": {
+          "visible": true,
+          "widget": "checkbox"
+        },
+        "event": {
+          "visible": true,
+          "widget": "lineedit"
+        },
+        "name": {
+          "visible": true,
+          "widget": "lineedit"
+        },
+        "amount": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": -999999,
+          "max": 999999
+        },
+        "delayMs": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999,
+          "suffix": " ms"
+        },
+        "pattern.mode": {
+          "visible": true,
+          "widget": "combo",
+          "options": [
+            "solid",
+            "flash",
+            "pulse",
+            "sequence"
+          ]
+        },
+        "pattern.color": {
+          "visible": true,
+          "widget": "rgb_color"
+        },
+        "pattern.brightness": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 255
+        },
+        "pattern.durationMs": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999,
+          "suffix": " ms"
+        },
+        "pattern.count": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999
+        },
+        "pattern.intervalMs": {
+          "visible": true,
+          "widget": "spinbox",
+          "min": 0,
+          "max": 999999,
+          "suffix": " ms"
+        },
+        "pattern.steps": {
+          "visible": true,
+          "widget": "light_steps_table"
+        }
+      }
+    }
+  }
+}
